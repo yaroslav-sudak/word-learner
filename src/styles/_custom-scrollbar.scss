@@ -1,0 +1,16 @@
+::-webkit-scrollbar {
+  width: 12px;
+
+  &-track {
+    background: var(--bg-color-scrollbar);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  &-thumb {
+    border: 1px solid var(--bg-color-scrollbar);
+    background: var(--bg-color-scrollbar-thumb);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}

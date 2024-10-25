@@ -1,0 +1,40 @@
+.input {
+  font-family: var(--font-main);
+  font-size: inherit;
+  font-weight: 500;
+  height: 100%;
+  width: 100%;
+}
+
+input {
+  border: 2px solid var(--bg-color-input);
+  background-color: var(--bg-color-input);
+  color: var(--text-color-input);
+  justify-content: center;
+  border-radius: 8px;
+  user-select: none;
+  padding: 0 10px;
+  display: flex;
+  height: 100%;
+  width: 100%;
+
+  &:focus {
+    border-color: var(--border-color-input);
+  }
+
+  &.error {
+    border-color: var(--border-color-input-error);
+  }
+
+  &::placeholder {
+    color: inherit;
+    opacity: 0.5;
+  }
+}
+
+span.error {
+  color: var(--text-color-input-error);
+  margin-left: 12px;
+  font-weight: 700;
+  font-size: .75em;
+}

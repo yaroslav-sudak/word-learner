@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./styles/index";
+
+body {
+  // font-family: --font-main;
+  &.fullscreen {
+    #main {
+      max-height: 90vh;
+      max-width: 90vw;
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  body {
+    &.fullscreen {
+      #main {
+        max-height: 100vh;
+        max-width: 100vw;
+      }
+    }
+  }
+}

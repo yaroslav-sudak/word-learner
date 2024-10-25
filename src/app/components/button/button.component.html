@@ -1,0 +1,5 @@
+<div class="button">
+  <button [disabled]="disabled()" [class]="noBackground() ? 'no-background' : ''" (click)="click()">
+    <ng-content></ng-content>
+  </button>
+</div>

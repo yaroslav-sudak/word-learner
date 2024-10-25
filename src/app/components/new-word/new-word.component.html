@@ -1,0 +1,44 @@
+<div class="new-word" #newWord>
+  <div class="button button-close">
+    <app-button (click)="close()" [noBackground]="true">✖</app-button>
+  </div>
+  <div class="inputs">
+    <section>
+      <div class="input">
+        <app-input
+          [error]="wordError"
+          [inputValue]="word"
+          (valueOutput)="setWord($event)"
+          placeholder="Word"
+          type="text"
+        ></app-input>
+      </div>
+    </section>
+    <section>
+      <div class="input-block" *ngFor="let item of translations; let i = index">
+        <div class="button button-remove">
+          <app-button
+            [disabled]="translations.length === 1"
+            (onClick)="removeTranslation(i)"
+            >-</app-button
+          >
+        </div>
+        <div class="input">
+          <app-input
+            placeholder="Translation"
+            type="text"
+            (valueOutput)="setTranslation($event, i)"
+            [error]="translationsErrors[i]"
+            error="At least one translation is required"
+          ></app-input>
+        </div>
+        <div class="button button-add">
+          <app-button (onClick)="addTranslation(i)">+</app-button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="button-save">
+    <app-button (click)="save()" [disabled]="!isValid">Save</app-button>
+  </div>
+</div>

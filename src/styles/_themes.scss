@@ -1,0 +1,73 @@
+$themes: (
+  blue-pink: (
+    borderColorButton: $color-pink1,
+    borderColorInput: $color-blue4,
+    borderColorInputError: $color-red2,
+    bgColorScrollbar: $color-pink4,
+    bgColorScrollbarThumb: $color-blue6,
+    bgColorInput: $color-blue5,
+    bgColorButton: $color-pink3,
+    bgColorButtonHover: $color-pink2,
+    bgColorButtonActive: $color-pink1,
+    bgColorFilter: $color-black1,
+    textColorButton: $color-white1,
+    textColorInputError: $color-red3,
+    textColorMain: $color-white1,
+    gradientColor1: $color-blue5,
+    gradientColor2: $color-pink2,
+    fontMain: $font-main
+  ),
+  // yellow-orange: (
+  //   bgColorButton: $color-yellow1,
+  //   bgColorButtonHover: $color-orange1,
+  //   bgColorFilter: $color-black,
+  //   textColorButton: $color-black,
+  //   textColorMain: $color-black,
+  //   gradientColor1: $color-yellow1,
+  //   gradientColor2: $color-orange1
+  // ),
+  light-green: (
+    
+  )
+  // light-green: (
+  //   bgColorButton: $color-light-green,
+  //   bgColorButtonHover: $color-light-green,
+  //   bgColorFilter: $color-black,
+  //   textColorButton: $color-black,
+  //   textColorMain: $color-black,
+  //   gradientColor1: $color-light-green,
+  //   gradientColor2: $color-light
+  // ),
+  // yellow-green: (
+  //   bgColorButton: $color-yellow,
+  //   bgColorButtonHover: $color-light-green,
+  //   bgColorFilter: $color-black,
+  //   textColorButton: $color-black,
+  //   textColorMain: $color-black,
+  //   gradientColor1: $color-green,
+  //   gradientColor2: $color-yellow
+  // )
+);
+
+@each $theme-name, $theme-values in $themes {
+  [data-theme="#{$theme-name}"] {
+    --border-color-button: #{map-get($theme-values, borderColorButton)};
+    --border-color-input: #{map-get($theme-values, borderColorInput)};
+    --border-color-input-error: #{map-get($theme-values, borderColorInputError)};
+    --bg-color-scrollbar: #{map-get($theme-values, bgColorScrollbar)};
+    --bg-color-scrollbar-thumb: #{map-get($theme-values, bgColorScrollbarThumb)};
+    --bg-color-input: #{map-get($theme-values, bgColorInput)};
+    --bg-color-button: #{map-get($theme-values, bgColorButton)};
+    --bg-color-button-hover: #{map-get($theme-values, bgColorButtonHover)};
+    --bg-color-button-active: #{map-get($theme-values, bgColorButtonActive)};
+    --bg-color-filter: #{map-get($theme-values, bgColorFilter)};
+    --text-color-button: #{map-get($theme-values, textColorButton)};
+    --text-color-input-error: #{map-get($theme-values, textColorInputError)};
+    --text-color-main: #{map-get($theme-values, textColorMain)};
+    --gradient-color1: #{map-get($theme-values, gradientColor1)};
+    --gradient-color2: #{map-get($theme-values, gradientColor2)};
+    --font-main: #{map-get($theme-values, fontMain)}; 
+  }
+}
+
+

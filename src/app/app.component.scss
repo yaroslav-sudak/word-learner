@@ -1,0 +1,35 @@
+.content {
+  background: var(--gradient-main);
+  color: var(--text-color-main);
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 20px;
+  display: flex;
+  width: 100%;
+}
+
+section {
+  transition: max-width .3s, max-height .3s;
+  position: relative;
+  max-height: 400px;
+  max-width: 600px;
+  margin: 0 50px;
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
+
+  &::before {
+    background: var(--bg-color-filter);
+    border-radius: 8px;
+    position: absolute;
+    filter: blur(2px);
+    opacity: 0.3;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    content: "";
+    left: 0;
+    top: 0;
+  }
+}

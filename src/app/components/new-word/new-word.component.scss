@@ -1,0 +1,185 @@
+.new-word {
+  padding: 64px max(2vw, 20px) 2vh;
+  justify-content: space-between;
+  transition: 0.1s opacity;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  display: flex;
+  height: 100%;
+  width: 100%;
+
+  &.hide {
+    opacity: 0;
+  }
+}
+
+.inputs {
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+  font-size: 24px;
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+section {
+  max-height: calc(86vh - 130px);
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  display: flex;
+  width: 100%;
+
+  &:first-child {
+    width: calc(100% - 268px);
+    height: 104px;
+  }
+}
+
+.input {
+  max-width: 400px;
+  max-height: 64px;
+  width: 100%;
+  flex: 1;
+
+  &-block {
+    margin-bottom: 40px;
+    position: relative;
+    max-width: 568px;
+    display: flex;
+    width: 100%;
+  }
+}
+
+.button {
+  font-size: 40px;
+  flex-grow: 0;
+  width: 64px;
+
+  &-close {
+    position: absolute;
+    font-size: 60px;
+    height: 64px;
+    right: 0px;
+    top: 0px;
+  }
+
+  &-remove {
+    margin-right: 20px;
+  }
+
+  &-add {
+    margin-left: 20px;
+  }
+
+  &-save {
+    max-width: 520px;
+    padding: 0 60px;
+    position: flex;
+    height: 60px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .inputs {
+    font-size: 20px;
+  }
+
+  section {
+    &:first-child {
+      height: 96px;
+    }
+  }
+
+  .input-block {
+    margin-bottom: 32px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .inputs {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  section {
+    max-height: calc(86vh - 244px);
+    max-width: 500px;
+
+    &:last-child {
+      padding-top: 20px;
+    }
+
+    &:first-child,
+    &:last-child {
+      width: 100%;
+    }
+  }
+
+  .input-block {
+    max-width: 400px;
+  }
+
+  .button {
+    position: absolute;
+    z-index: 1;
+    margin: 0;
+
+    &-remove {
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      width: 34px;
+      left: 0;
+    }
+
+    &-add {
+      transform: translate(50%, -50%);
+      font-size: 20px;
+      width: 34px;
+      right: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .inputs {
+    font-size: 18px;
+  }
+
+  section {
+    max-height: calc(98vh - 244px);
+    padding: 0 20px;
+
+    &:first-child {
+      height: 84px;
+    }
+
+    &:last-child {
+      padding-top: 20px;
+    }
+  }
+  
+  .input {
+    max-height: 56px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .inputs {
+    font-size: 14px;
+  }
+
+  section {
+    &:first-child {
+      height: 68px;
+    }
+  }
+    
+  .input {
+    max-height: 45px;
+  }
+}
