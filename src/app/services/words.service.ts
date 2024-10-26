@@ -5,15 +5,19 @@ import { IWord } from '../interfaces/word.interface';
   providedIn: 'root',
 })
 export class WordsService implements OnInit {
-  words: IWord[] = [];
+  private words: IWord[] = [];
 
   // ! Front side
 
   ngOnInit(): void {
-    this.words = this.getWords();
+    this.words = this.loadWords();
   }
 
-  private getWords(): IWord[] {
+  getWords(): IWord[] {
+    return this.words;
+  }
+
+  private loadWords(): IWord[] {
     return localStorage.getItem('words')
       ? JSON.parse(localStorage.getItem('words')!)
       : [];
@@ -32,7 +36,7 @@ export class WordsService implements OnInit {
 
   // ! Back side
 
-  private random(...args: number[]): number {
+  random(...args: number[]): number {
     if (args.length === 1) {
       return Math.round(Math.random() * args[0]);
     } else {

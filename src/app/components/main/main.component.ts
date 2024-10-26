@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { Router } from '@angular/router';
+import { WordsService } from '../../services/words.service';
 
 @Component({
   selector: 'app-main',
@@ -10,14 +11,23 @@ import { Router } from '@angular/router';
   styleUrl: './main.component.scss',
 })
 export class MainComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private wordsService: WordsService) {}
 
   @ViewChild('main') main?: ElementRef<HTMLElement>;
+
+  isEnoughWords() {
+    return this.wordsService.getWords().length > 0
+  }
+
   newWordPage() {
     document.body.classList.add('fullscreen');
     this.main?.nativeElement.classList.add('hide');
     setTimeout(() => {
       this.router.navigate(['/new-word'], { queryParams: { fullscreen: true } });
     }, 250);
+  }
+
+  log(a: any) {
+    console.log(a);
   }
 }

@@ -1,0 +1,20 @@
+<div class="chose-right">
+  <div class="button button-back">
+    <app-button>Back</app-button>
+  </div>
+  <section>
+    <div class="word"></div>
+  </section>
+  <section>
+    <ul class="transtlations" #translationsElement>
+      @for (item of translations[currentQuestion]; track item.translation) {
+      <li class="translation">
+        <app-button (onClick)="checkAnswer()">{{ item.translation }}</app-button>
+      </li>
+      }
+    </ul>
+  </section>
+  <div class="button button-next">
+    <app-button (click)="nextQuestion()">Next</app-button>
+  </div>
+</div>

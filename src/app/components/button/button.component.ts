@@ -10,11 +10,11 @@ import { Component, input, output } from '@angular/core';
 export class ButtonComponent {
   noBackground = input<boolean>(false);
   disabled = input<boolean>(false);
-  onClick = output<void>();
+  onClick = output<MouseEvent>();
 
-  click() {
+  click($event: MouseEvent) {
     if (!this.disabled()) {
-      this.onClick.emit();
+      this.onClick.emit($event);
     }
   }
 }
