@@ -1,0 +1,7 @@
+.choose-right {
+  transition: .1s opacity;
+
+  &.hide {
+    opacity: 0;
+  }
+}

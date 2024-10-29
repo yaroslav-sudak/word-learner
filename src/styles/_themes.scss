@@ -27,7 +27,12 @@ $themes: (
   //   gradientColor2: $color-orange1
   // ),
   light-green: (
-    
+    borderColorInputError: $color-red4,
+    textColorInputError: $color-red5,
+    gradientColor2: $color-yellow1,
+    gradientColor1: $color-green5,
+    fontMain: $font-main
+
   )
   // light-green: (
   //   bgColorButton: $color-light-green,

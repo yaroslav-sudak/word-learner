@@ -5,7 +5,32 @@ import { IWord } from '../interfaces/word.interface';
   providedIn: 'root',
 })
 export class WordsService implements OnInit {
-  private words: IWord[] = [];
+  private words: { [id: string]: IWord } = {
+    '123234': {
+      word: '',
+      translations: [],
+      chance: 100,
+      id: 123234,
+    },
+    '123235': {
+      word: '',
+      translations: [],
+      chance: 100,
+      id: 123235,
+    },
+    '123236': {
+      word: '',
+      translations: [],
+      chance: 100,
+      id: 123236,
+    },
+    '123237': {
+      word: '',
+      translations: [],
+      chance: 100,
+      id: 123237,
+    },
+  };
 
   // ! Front side
 
@@ -13,23 +38,36 @@ export class WordsService implements OnInit {
     this.words = this.loadWords();
   }
 
-  getWords(): IWord[] {
-    return this.words;
+  private getSize(): number {
+    return this.getKeys().length;
   }
 
-  private loadWords(): IWord[] {
+  private getKeys(): string[] {
+    return Object.keys(this.words);
+  }
+
+  getWords(): IWord[] {
+    return this.getKeys().map((key) => this.words[key]);
+  }
+
+  private loadWords(): { [id: string]: IWord } {
     return localStorage.getItem('words')
       ? JSON.parse(localStorage.getItem('words')!)
-      : [];
+      : {};
   }
 
   private setWords(): void {
     localStorage.setItem('words', JSON.stringify(this.words));
   }
 
-  getWord(id: number): IWord | undefined {
-    if (id < 0 || id >= this.words.length) {
+  getWord(id: number | string): IWord | undefined {
+    if (typeof id === 'string' && id in this.words) {
       return this.words[id];
+    } else if (typeof id === 'number') {
+      if (id < 0 || id >= this.getSize()) {
+        return undefined;
+      }
+      return this.words[this.getKeys()[id]];
     }
     return undefined;
   }
@@ -45,11 +83,11 @@ export class WordsService implements OnInit {
   }
 
   // Return random word from words array with checking chance of its appearance
-  private getRandomWord(): IWord | undefined {
-    if (this.words.length === 0) {
+  getRandomWord(): { [id: string]: IWord } | undefined {
+    if (this.getSize() === 0) {
       return undefined;
     }
-    let randomWord = this.getWord(this.random(0, this.words.length - 1));
+    let randomWord = this.getWord(this.random(0, this.getSize() - 1));
     if (randomWord && randomWord.chance <= this.random(0, 100)) {
       return randomWord;
     } else {

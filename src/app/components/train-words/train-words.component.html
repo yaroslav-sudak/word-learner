@@ -1,9 +1,9 @@
-<div class="training-words">
+<div class="training-words" #trainWords>
   <div class="button button-back">
-    <app-button>Back</app-button>
+    <app-button (onClick)="back()">Back</app-button>
   </div>
   <div class="button">
-    <app-button>Choose right</app-button>
+    <app-button (onClick)="chooseRight()">Choose right</app-button>
   </div>
   <div class="button">
     <app-button>Write translation</app-button>

@@ -108,7 +108,8 @@ section {
 
   section {
     max-height: calc(86vh - 244px);
-    max-width: 500px;
+    max-width: 700px;
+    padding: 0 20px;
 
     &:last-child {
       padding-top: 20px;
@@ -120,8 +121,14 @@ section {
     }
   }
 
-  .input-block {
-    max-width: 400px;
+  .input {
+    &:has(+ .button) {
+      clip-path: polygon(17px 0, calc(100% - 17px) 0, 100% 17px, 100% 100%, 0 100%, 0 17px);
+    }
+    
+    &-block {
+      max-width: 400px;
+    }
   }
 
   .button {
@@ -152,7 +159,6 @@ section {
 
   section {
     max-height: calc(98vh - 244px);
-    padding: 0 20px;
 
     &:first-child {
       height: 84px;
@@ -162,7 +168,7 @@ section {
       padding-top: 20px;
     }
   }
-  
+
   .input {
     max-height: 56px;
   }
@@ -178,7 +184,7 @@ section {
       height: 68px;
     }
   }
-    
+
   .input {
     max-height: 45px;
   }

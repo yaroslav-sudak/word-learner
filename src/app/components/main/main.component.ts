@@ -12,7 +12,7 @@ import { WordsService } from '../../services/words.service';
 })
 export class MainComponent {
   constructor(private router: Router, private wordsService: WordsService) {}
-
+  
   @ViewChild('main') main?: ElementRef<HTMLElement>;
 
   isEnoughWords() {
@@ -27,7 +27,16 @@ export class MainComponent {
     }, 250);
   }
 
-  log(a: any) {
-    console.log(a);
+  trainWordsPage() {
+      this.router.navigate(['/train-words'], { queryParams: { fullscreen: false } });
+  }
+
+  listOfWordsPage() {
+    document.body.classList.add('fullscreen');
+    this.main?.nativeElement.classList.add('hide');
+    setTimeout(() => {
+      this.router.navigate(['/list-of-words'], { queryParams: { fullscreen: true } });
+    }, 250);
+    
   }
 }

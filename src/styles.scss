@@ -2,7 +2,8 @@
 @import "./styles/index";
 
 body {
-  // font-family: --font-main;
+  font-family: var(--font-main);
+  
   &.fullscreen {
     #main {
       max-height: 90vh;
