@@ -7,7 +7,7 @@
 }
 
 input {
-  border: 2px solid var(--bg-color-input);
+  border: 2px solid var(--border-color-input);
   background-color: var(--bg-color-input);
   color: var(--text-color-input);
   justify-content: center;
@@ -19,7 +19,7 @@ input {
   width: 100%;
 
   &:focus {
-    border-color: var(--border-color-input);
+    border-color: var(--border-color-input-active);
   }
 
   &.error {

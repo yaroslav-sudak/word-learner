@@ -1,7 +1,8 @@
 $themes: (
   blue-pink: (
     borderColorButton: $color-pink1,
-    borderColorInput: $color-blue4,
+    borderColorInput: $color-blue5,
+    borderColorInputActive: $color-blue4,
     borderColorInputError: $color-red2,
     bgColorScrollbar: $color-pink4,
     bgColorScrollbarThumb: $color-blue6,
@@ -31,8 +32,20 @@ $themes: (
     textColorInputError: $color-red5,
     gradientColor2: $color-yellow1,
     gradientColor1: $color-green5,
-    fontMain: $font-main
+    fontMain: $font-main,
 
+    borderColorInputActive: $color-black1,
+    borderColorScrollbar: $color-black1,
+    borderColorButton: $color-black1,
+    borderColorInput: $color-black1,
+    bgColorScrollbar: $color-transparent,
+    bgColorScrollbarThumb: $color-black1,
+    bgColorInput: $color-transparent,
+    bgColorButton: $color-transparent,
+    bgColorButtonHover: $color-black1-transparent,
+    bgColorButtonActive: $color-black3-transparent,
+    bgColorFilter: $color-black4-transparent,
+    textColorMain: $color-black1,
   )
   // light-green: (
   //   bgColorButton: $color-light-green,
@@ -58,7 +71,9 @@ $themes: (
   [data-theme="#{$theme-name}"] {
     --border-color-button: #{map-get($theme-values, borderColorButton)};
     --border-color-input: #{map-get($theme-values, borderColorInput)};
+    --border-color-input-active: #{map-get($theme-values, borderColorInputActive)};
     --border-color-input-error: #{map-get($theme-values, borderColorInputError)};
+    --border-color-scrollbar: #{map-get($theme-values, borderColorScrollbar)};
     --bg-color-scrollbar: #{map-get($theme-values, bgColorScrollbar)};
     --bg-color-scrollbar-thumb: #{map-get($theme-values, bgColorScrollbarThumb)};
     --bg-color-input: #{map-get($theme-values, bgColorInput)};

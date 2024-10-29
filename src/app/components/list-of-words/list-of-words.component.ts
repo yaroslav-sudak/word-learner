@@ -41,6 +41,7 @@ export class ListOfWordsComponent implements OnInit {
   }
 
   removeWord(index: number) {
+    this.words.splice(index, 1);
     this.wordsService.removeWord(index);
   }
 

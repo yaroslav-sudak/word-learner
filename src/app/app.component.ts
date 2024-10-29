@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-import { HeaderComponent } from "./components/header/header.component";
+import { HeaderComponent } from './components/header/header.component';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +19,6 @@ import { HeaderComponent } from "./components/header/header.component";
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements AfterViewInit, OnInit {
-
   @ViewChild('content') content?: ElementRef<HTMLElement>;
   mousemoveendEvent: Event = new Event('mousemoveend');
 
@@ -40,15 +39,22 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   isMoving: boolean = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private route: ActivatedRoute) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       if (params['fullscreen'] === 'true') {
         document.body.classList.add('fullscreen');
       }
-    })
-    document.body.classList
+    });
+    document.body.classList;
+  }
+
+  ngAfterViewInit(): void {
+    this.startGradientMove();
   }
 
   adaptAngle = (deg: number): number => {
@@ -90,8 +96,8 @@ export class AppComponent implements AfterViewInit, OnInit {
   setParameters = (x: number, y: number): void => {
     this.destinationDistance = this.getDistance(x, y);
     this.destinationDeg = this.getDeg(x, y);
-    this.isFinalDistance = false;
-    this.isFinalDeg = false;
+    this.isFinalDistance = this.destinationDistance == this.currentDistance;
+    this.isFinalDeg = this.destinationDeg == this.currentDeg;
   };
 
   newDistance = (): number => {
@@ -167,26 +173,30 @@ export class AppComponent implements AfterViewInit, OnInit {
     }, 5000);
   };
 
-  ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId) && this.content && document) {
-      this.content.nativeElement.addEventListener(
-        'mousemove',
-        (event: MouseEvent) => {
-          clearTimeout(this.mouseStopTimeout);
-          this.mouseStopTimeout = setTimeout(() => {
-            document.dispatchEvent(this.mousemoveendEvent);
-          }, 50);
+  mouseMoveCheck = (): void => {
+    clearTimeout(this.mouseStopTimeout);
+    this.mouseStopTimeout = setTimeout(() => {
+      document.dispatchEvent(this.mousemoveendEvent);
+    }, 50);
+  };
 
-          if (!this.isMoving) {
-            clearTimeout(this.randomCoordinatesTimeout);
-            clearInterval(this.randomCoordinatesInterval);
-            clearInterval(this.gradienTransitionInterval);
-            this.setGradientTransitionInterval();
-            this.isMoving = true;
-          }
-          this.setParameters(...this.getCoordinates(event));
-        }
-      );
+  moveGradient = (event: MouseEvent): void => {
+    if (!this.isMoving) {
+      clearTimeout(this.randomCoordinatesTimeout);
+      clearInterval(this.randomCoordinatesInterval);
+      clearInterval(this.gradienTransitionInterval);
+      this.setGradientTransitionInterval();
+      this.isMoving = true;
+    }
+    this.setParameters(...this.getCoordinates(event));
+  };
+
+  startGradientMove = (): void => {
+    if (document) {
+      document.addEventListener('mousemove', (event: MouseEvent) => {
+        this.mouseMoveCheck();
+        this.moveGradient(event);
+      });
 
       document.addEventListener('mousemoveend', () => {
         this.isMoving = false;
@@ -195,5 +205,5 @@ export class AppComponent implements AfterViewInit, OnInit {
       this.setGradientTransitionInterval();
       this.setRandomCoordinatesTimeout();
     }
-  }
+  };
 }

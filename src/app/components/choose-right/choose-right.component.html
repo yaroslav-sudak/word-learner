@@ -3,7 +3,9 @@
     <app-button (onClick)="back()">Back</app-button>
   </div>
   <section>
-    <div class="word"></div>
+    <div class="word">
+      {{ words[currentQuestion].word }}
+    </div>
   </section>
   <section>
     <ul class="transtlations" #translationsElement>
@@ -15,6 +17,6 @@
     </ul>
   </section>
   <div class="button button-next">
-    <app-button (click)="nextQuestion()">Next</app-button>
+    <app-button (click)="nextQuestion()">{{currentQuestion == words.length - 1 ? 'Finish' : 'Next'}}</app-button>
   </div>
 </div>

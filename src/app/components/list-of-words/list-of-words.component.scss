@@ -21,6 +21,7 @@
   overflow: auto;
   display: flex;
   width: 100%;
+  gap: 10px;
 }
 
 .word {
@@ -32,6 +33,7 @@
     background-color: var(--bg-color-input);
     justify-content: flex-end;
     border-radius: 8px;
+    padding: 0 10px;
     display: flex;
     width: 100%;
   }
@@ -47,6 +49,7 @@
   &-list {
     transition: 0.2s max-height;
     flex-direction: column;
+    padding-left: 25px;
     max-height: 1.5em;
     text-align: right;
     overflow: hidden;

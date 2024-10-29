@@ -7,28 +7,28 @@ import { IWord } from '../interfaces/word.interface';
 export class WordsService implements OnInit {
   private words: { [id: string]: IWord } = {
     '123234': {
-      word: '',
-      translations: [],
+      word: 'a',
+      translations: ['a1', 'a2', 'a3'],
       chance: 100,
-      id: 123234,
+      id: '123234',
     },
     '123235': {
-      word: '',
-      translations: [],
+      word: 'b',
+      translations: ['b1', 'b2', 'b3'],
       chance: 100,
-      id: 123235,
+      id: '123235',
     },
     '123236': {
-      word: '',
-      translations: [],
+      word: 'c',
+      translations: ['c1', 'c2', 'c3'],
       chance: 100,
-      id: 123236,
+      id: '123236',
     },
     '123237': {
-      word: '',
-      translations: [],
+      word: 'd',
+      translations: ['d1', 'd2', 'd3'],
       chance: 100,
-      id: 123237,
+      id: '123237',
     },
   };
 
@@ -51,22 +51,22 @@ export class WordsService implements OnInit {
   }
 
   private loadWords(): { [id: string]: IWord } {
-    return localStorage.getItem('words')
+    let words = localStorage.getItem('words')
       ? JSON.parse(localStorage.getItem('words')!)
-      : {};
+      : [];
+    let wordsList: { [id: string]: IWord } = {};
+    words.forEach((w: IWord) => (wordsList[w.id] = w));
+    return wordsList;
   }
 
   private setWords(): void {
-    localStorage.setItem('words', JSON.stringify(this.words));
+    localStorage.setItem('words', JSON.stringify(this.getWords()));
   }
 
   getWord(id: number | string): IWord | undefined {
     if (typeof id === 'string' && id in this.words) {
       return this.words[id];
-    } else if (typeof id === 'number') {
-      if (id < 0 || id >= this.getSize()) {
-        return undefined;
-      }
+    } else if (typeof id === 'number' && 0 <= id && id < this.getSize()) {
       return this.words[this.getKeys()[id]];
     }
     return undefined;
@@ -98,9 +98,9 @@ export class WordsService implements OnInit {
   // Return array of unique random words
   getRandomWords(numberOfWords: number): IWord[] | undefined {
     if (
-      numberOfWords > this.words.length ||
-      numberOfWords < 0 ||
-      this.words.length === 0
+      numberOfWords > this.getSize() ||
+      numberOfWords <= 0 ||
+      this.getSize() === 0
     ) {
       return undefined;
     }
@@ -122,49 +122,46 @@ export class WordsService implements OnInit {
   createWord(w: { word: string; translations: string[] }): void {
     let word = w.word;
     let translations = w.translations;
-    this.words.push({ word, translations, chance: 100, id: this.words.length });
+    let id = Date.now() + '';
+    this.words[id] = { word, translations, chance: 100, id };
     this.setWords();
   }
 
-  removeWord(...ids: number[]): void {
+  removeWord(...ids: (string | number)[]): void {
     for (let id of ids) {
-      if (0 <= id && id < this.words.length) {
-        this.words.splice(id, 1);
+      if (typeof id === 'string' && id in this.words) {
+        delete this.words[id];
+      } else if (typeof id === 'number' && 0 <= id && id < this.getSize()) {
+        delete this.words[this.getKeys()[id]];
       }
     }
     this.setWords();
   }
 
   removeAllWords(): void {
-    this.words = [];
+    this.words = {};
     this.setWords();
   }
 
-  increaseChance(id: number): void {
-    if (0 <= id && id < this.words.length) {
-      this.words[id].chance /= 0.9;
+  increaseChance(id: string | number): void {
+    let word = this.getWord(id);
+    if (word) {
+      word.chance /= 0.9;
       this.setWords();
     }
   }
 
   decreaseChance(id: number): void {
-    if (0 <= id && id < this.words.length) {
-      this.words[id].chance *= 0.9;
+    let word = this.getWord(id);
+    if (word) {
+      word.chance *= 0.9;
       this.setWords();
     }
   }
 
   getRandomTranslation(numberOfTranslations: number): string[] | undefined {
-    if (
-      this.words.length === 0 ||
-      numberOfTranslations < 0 ||
-      numberOfTranslations > this.words.length
-    ) {
-      return undefined;
-    } else {
-      return this.getRandomWords(numberOfTranslations)?.map(
-        (w) => w.translations[this.random(0, w.translations.length - 1)]
-      );
-    }
+    return this.getRandomWords(numberOfTranslations)?.map(
+      (w) => w.translations[this.random(0, w.translations.length - 1)]
+    );
   }
 }
