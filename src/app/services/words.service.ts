@@ -83,7 +83,7 @@ export class WordsService implements OnInit {
   }
 
   // Return random word from words array with checking chance of its appearance
-  getRandomWord(): { [id: string]: IWord } | undefined {
+  getRandomWord(): IWord | undefined {
     if (this.getSize() === 0) {
       return undefined;
     }
